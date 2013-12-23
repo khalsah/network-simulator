@@ -61,7 +61,7 @@ function NetworkGraph(el) {
         
       if (type == 'switch') {
           return switch_image;
-      } else if (type == "node") {
+      } else if (type == "terminal") {
           return node_image; 
       } else {
           return default_image;
@@ -77,32 +77,29 @@ function NetworkGraph(el) {
         .attr("height", h);
 
     var force = d3.layout.force()
-        .gravity(0.05)
-        .distance(300)
-        .charge(-100)
+        .gravity(0)
+        .linkDistance(300)
         .size([w, h]);
 
     var nodes = force.nodes(),
         links = force.links();
 
     var update = function () {
-        var link = vis.selectAll("line.link").data(links, function(d) { return d.source.id + "-" + d.target.id; });
 
-        link.attr("class", function(data) { 
-          return "link " + data.connection.state; 
-        });
-
-  
-        link.enter().insert("line").attr("class", "link");
-        link.exit().remove();
 
         var node = vis.selectAll("g.node").data(nodes, function(d) { return d.id;});
-        var nodeEnter = node.enter().append("g").attr("class", "node").call(force.drag);
+        var nodeEnter = node.enter().append("g").attr("class", "node").attr("width", 64).attr("height", 64).call(force.drag);
+
+        nodeEnter.append("circle")
+            .attr("fill", "white")
+            .attr("x", -32)
+            .attr("y", -32)
+            .attr("r", 32);
 
         nodeEnter.append("image")
             .attr("xlink:href", function(data) { return getNoun(data); })
-            .attr("x", -8)
-            .attr("y", -8)
+            .attr("x", -32)
+            .attr("y", -32)
             .attr("width", 64)
             .attr("height", 64);
 
@@ -113,6 +110,16 @@ function NetworkGraph(el) {
             .text(function(d) {return d.id;});
 
         node.exit().remove();
+
+        var link = vis.selectAll("line.link").data(links, function(d) { return d.source.id + "-" + d.target.id; });
+
+        link.attr("class", function(data) { 
+          return "link " + data.connection.state; 
+        });
+
+  
+        link.enter().insert("line").attr("class", "link");
+        link.exit().remove();
 
         force.on("tick", function() {
           link.attr("x1", function(d) { return d.source.x; })
