@@ -50,6 +50,24 @@ function NetworkGraph(el) {
         }
     };
 
+    var getNoun = function(type) {
+      var default_image = "https://github.com/favicon.ico";
+      var switch_image = "assets/icon_22677.png";
+      var node_image = "assets/icon_17655.png";
+      debugger; 
+
+      switch (type) {
+        case: 'switch'
+          return switch_image;
+          break;
+        case: 'node'
+          retun node_image; 
+          break;
+        default:
+          return default_image;
+      }
+    }
+
     // set up the D3 visualisation in the specified element
     var w = $(el).innerWidth(),
         h = $(el).innerHeight();
@@ -82,7 +100,7 @@ function NetworkGraph(el) {
         var nodeEnter = node.enter().append("g").attr("class", "node").call(force.drag);
 
         nodeEnter.append("image")
-            .attr("xlink:href", function(data) { data.chassis.type } "https://github.com/favicon.ico")
+            .attr("xlink:href", function(data) { getNoun(data.chassis.type); } "https://github.com/favicon.ico")
             .attr("x", -8)
             .attr("y", -8)
             .attr("width", 64)
