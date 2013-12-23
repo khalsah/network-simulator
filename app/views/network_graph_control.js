@@ -91,7 +91,3 @@ function NetworkGraph(el) {
     // Make it all go
     update();
 }
-
-/*
-graph = new networkGraph("#graph");
-*/
