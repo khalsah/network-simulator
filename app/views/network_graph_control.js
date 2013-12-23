@@ -6,7 +6,7 @@ function NetworkGraph(el) {
 
     this.removeNode = function (id) {
         var i = 0;
-        var n = this.findNode(id);
+        var n = findNode(id);
 
         while (i < links.length) {
           if ((links[i]['source'] == n)||(links[i]['target'] == n)) { links.splice(i,1); }
@@ -17,11 +17,11 @@ function NetworkGraph(el) {
         update();
     };
 
-    this.removeConnection = function(connection) {
+    this.removeLink = function(connection) {
         var i = 0;
 
         while (i < links.length) {
-          if ((links[i]['connection'] == connection) { 
+          if (links[i]['connection'] == connection) { 
             links.splice(i,1); 
           } else { 
             i++; 
@@ -82,7 +82,7 @@ function NetworkGraph(el) {
         var nodeEnter = node.enter().append("g").attr("class", "node").call(force.drag);
 
         nodeEnter.append("image")
-            .attr("xlink:href", function(data) { data.chassis.type } "https://github.com/favicon.ico")
+            .attr("xlink:href", function(data) { return "https://github.com/favicon.ico"; })
             .attr("x", -8)
             .attr("y", -8)
             .attr("width", 64)
