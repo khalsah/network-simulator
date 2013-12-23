@@ -11,6 +11,8 @@ NetViz.NetworkGraphView = Backbone.View.extend({
     this.chassis_collection.bind('add', this.on_chassis_added, this);
     this.connection_collection.bind('add', this.on_connection_added, this);
 
+    this.connection_collection.bind('state', this.on_connection_state_change, this);
+
     this.render();
   },
 
@@ -24,5 +26,9 @@ NetViz.NetworkGraphView = Backbone.View.extend({
 
   on_chassis_added: function(added_chassis) {
     this.networkGraph.addNode(added_chassis.id, added_chassis.name);
+  },
+
+  on_connection_state_change: function(changed_connection) {
+    this.networkGraph.update();
   }
 });

@@ -34,6 +34,7 @@ _.extend(NetSim.Connection.prototype, Backbone.Events, {
   },
 
   notify: function(message) {
+    // active inactive
     this.trigger("state", message);
   }
 

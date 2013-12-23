@@ -17,16 +17,26 @@ function NetworkGraph(el) {
         update();
     };
 
-    this.addLink = function (source, target) {
-        links.push({"source":findNode(source),"target":findNode(target)});
+    this.addLink = function (source, target, connection) {
+        links.push({"source":findNode(source),"target":findNode(target), "connection":connection});
         update();
     };
+
+    this.update = function() {
+      update();
+    }
 
     var findNode = function(id) {
         for (var i in nodes) {
             if (nodes[i]["id"] === id) return nodes[i];
         }
     };
+  
+    /*var findLink = function(id) {
+        for (var i in links) {
+        // TODO;
+        }
+    }*/
 
     var findNodeIndex = function(id) {
         for (var i in nodes) {
@@ -54,6 +64,8 @@ function NetworkGraph(el) {
     var update = function () {
         var link = vis.selectAll("line.link").data(links, function(d) { return d.source.id + "-" + d.target.id; });
 
+        link.attr("class", function(data) { return data.connection.state; });
+  
         link.enter().insert("line").attr("class", "link");
         link.exit().remove();
 
@@ -61,7 +73,6 @@ function NetworkGraph(el) {
         var nodeEnter = node.enter().append("g").attr("class", "node").call(force.drag);
 
         nodeEnter.append("image")
-            //.attr("class", "circle")
             .attr("xlink:href", "https://github.com/favicon.ico")
             .attr("x", -8)
             .attr("y", -8)
