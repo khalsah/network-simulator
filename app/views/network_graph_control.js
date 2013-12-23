@@ -64,7 +64,9 @@ function NetworkGraph(el) {
     var update = function () {
         var link = vis.selectAll("line.link").data(links, function(d) { return d.source.id + "-" + d.target.id; });
 
-        link.attr("class", function(data) { return data.connection.state; });
+        link.attr("class", function(data) { 
+          return "link " + data.connection.state; 
+        });
   
         link.enter().insert("line").attr("class", "link");
         link.exit().remove();

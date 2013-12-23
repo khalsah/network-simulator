@@ -3,6 +3,7 @@ NetSim.Connection =  function(network, portA, portB) {
   this.portA = portA;
   this.portB = portB;
   this.queue = [];
+  this.state = "inactive";
 
   this.listenTo(this.portA, "transport", _.bind(this._send, this, this.portB));
   this.listenTo(this.portB, "transport", _.bind(this._send, this, this.portA));

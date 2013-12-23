@@ -1,4 +1,14 @@
 .link {
-  stroke: rgb(255,0,0);
+  stroke: black;
+  stroke-width: 2;
+}
+
+.active {
+  stroke: green;
+  stroke-width: 2;
+}
+
+.inactive {
+  stroke: black;
   stroke-width: 2;
 }

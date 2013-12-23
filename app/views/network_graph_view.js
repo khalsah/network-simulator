@@ -21,7 +21,7 @@ NetViz.NetworkGraphView = Backbone.View.extend({
   },
 
   on_connection_added: function(added_connection) {
-    this.networkGraph.addLink(added_connection.portA.chassis.id, added_connection.portB.chassis.id);
+    this.networkGraph.addLink(added_connection.portA.chassis.id, added_connection.portB.chassis.id, added_connection);
   },
 
   on_chassis_added: function(added_chassis) {
