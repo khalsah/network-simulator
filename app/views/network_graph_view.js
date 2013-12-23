@@ -1,5 +1,5 @@
 App.Views.NetworkGraphView = Backbone.View.extend({
-  el: 'network_graph',
+  el: '#network_graph',
 
   events: {
   },
