@@ -1,4 +1,7 @@
+_.extend(NetworkGraph.prototype, Backbone.Events);
+
 function NetworkGraph(el) {
+    var self = this;
     this.addNode = function (id, name, chassis) {
         nodes.push({"id":id, "name":name, "group":1, "chassis":chassis});
         update();
@@ -118,6 +121,10 @@ function NetworkGraph(el) {
               .attr("y2", function(d) { return d.target.y; });
 
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        });
+
+        node.on("click", function(data) {
+            self.trigger("editChassis", data.chassis);
         });
 
         force.start();

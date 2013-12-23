@@ -20,6 +20,7 @@ NetViz.NetworkGraphView = Backbone.View.extend({
 
   render: function() {
     this.networkGraph = new NetworkGraph(this.el);
+    this.listenTo(this.networkGraph, "all", _.bind(this.trigger, this));
   },
 
   on_connection_added: function(added_connection) {
@@ -31,7 +32,7 @@ NetViz.NetworkGraphView = Backbone.View.extend({
   },
 
   on_chassis_added: function(added_chassis) {
-    this.networkGraph.addNode(added_chassis.id, added_chassis.name);
+    this.networkGraph.addNode(added_chassis.id, added_chassis.name, added_chassis);
   },
 
   on_chassis_removed: function(chassis) {
