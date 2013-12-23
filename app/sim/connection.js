@@ -23,7 +23,18 @@ _.extend(NetSim.Connection.prototype, Backbone.Events, {
 
   _tick: function() {
     var action = this.queue.shift();
+
+    if(this.queue.length){
+      this.notify('active');
+    } else {
+      this.notify('innactive');
+    }
+
     if(action) action.destination.trigger("frame", action.frame);
+  },
+
+  notify: function(message) {
+    this.trigger("state", message);
   }
 
 });

@@ -1,6 +1,7 @@
 NetSim.Chassis = function(network, portCount) {
   this.id = _.uniqueId(this.type);
   this.network = network;
+  this.log = [];
   this._setupPorts(portCount);
 };
 
@@ -19,6 +20,11 @@ _.extend(NetSim.Chassis.prototype, Backbone.Events, {
     this.ports = _.times(portCount, function(i) {
       return new NetSim.Port(self);
     });
+  },
+
+  notify: function(message) {
+    this.log.push(message);
+    this.trigger("message", message);
   }
 
 });

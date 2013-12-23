@@ -18,8 +18,10 @@ NetSim.Switch = NetSim.Chassis.extend({
   process: function(port, frame) {
     this.addressTable[frame.srcMAC] = port;
     if(this.addressTable.hasOwnProperty(frame.dstMAC)) {
+      this.notify("MAC Address associated with port: ?");
       this.addressTable[frame.dstMAC].sendFrame(frame);
     } else {
+      this.notify("MAC Address not found, broadcasting");
       this.broadcast(port, frame);
     }
   },
