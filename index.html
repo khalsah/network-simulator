@@ -14,12 +14,14 @@
   <script src="app/index.js"></script>
   <script src="app/sim/debug.js"></script>
   <script src="app/sim/network.js"></script>
+  <script src="app/sim/mac_address.js"></script>
   <script src="app/sim/frame.js"></script>
   <script src="app/sim/connection.js"></script>
   <script src="app/sim/port.js"></script>
   <script src="app/sim/chassis.js"></script>
   <script src="app/sim/hub.js"></script>
   <script src="app/sim/switch.js"></script>
+  <script src="app/sim/terminal.js"></script>
   <script src="app/views/network_graph_control.js"></script>
   <script src="app/views/network_graph_view.js"></script> 
 
@@ -37,8 +39,17 @@
     var switch0 = this.network.addChassis(NetSim.Switch, 12);
     var switch1 = this.network.addChassis(NetSim.Switch, 12);
     var switch2 = this.network.addChassis(NetSim.Switch, 12);
+
     this.network.connectChassisPair(switch0, switch1);
     this.network.connectChassisPair(switch0, switch2);
+
+    var terminal0 = this.network.addChassis(NetSim.Terminal);
+    var terminal1 = this.network.addChassis(NetSim.Terminal);
+    var terminal2 = this.network.addChassis(NetSim.Terminal);
+
+    this.network.connectChassisPair(switch0, terminal0);
+    this.network.connectChassisPair(switch1, terminal1);
+    this.network.connectChassisPair(switch2, terminal2);
   </script>
 </body>
 </html>

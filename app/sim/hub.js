@@ -12,6 +12,8 @@ NetSim.Hub = NetSim.Chassis.extend({
         });
       });
     });
-  }
+  },
+
+  type: 'hub'
 
 });

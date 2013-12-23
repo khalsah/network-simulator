@@ -13,6 +13,8 @@ NetSim.Switch = NetSim.Chassis.extend({
     });
   },
 
+  type: 'switch',
+
   process: function(port, frame) {
     this.addressTable[frame.srcMAC] = port;
     if(this.addressTable.hasOwnProperty(frame.dstMAC)) {

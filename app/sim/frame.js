@@ -1,4 +1,3 @@
-NetSim.MacAddress = /^([0-9A-F]{2}\:){5}[0-9A-F]{2}$/;
 
 NetSim.Frame = function(data){
   this.dstMAC = data.dstMAC.toUpperCase();
@@ -14,11 +13,11 @@ _.extend(NetSim.Frame.prototype, {
   },
 
   validate: function() {
-    if(!this.dstMAC || !NetSim.MacAddress.test(this.dstMAC)) {
+    if(!this.dstMAC || !NetSim.MacAddress.Pattern.test(this.dstMAC)) {
       throw Error("Invalid destination MAC");
     }
 
-    if(!this.srcMAC || !NetSim.MacAddress.test(this.srcMAC)) {
+    if(!this.srcMAC || !NetSim.MacAddress.Pattern.test(this.srcMAC)) {
       throw Error("Invalid source MAC");
     }
   }
