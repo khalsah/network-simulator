@@ -50,20 +50,17 @@ function NetworkGraph(el) {
         }
     };
 
-    var getNoun = function(type) {
+    var getNoun = function(data) {
       var default_image = "https://github.com/favicon.ico";
       var switch_image = "assets/icon_22677.png";
       var node_image = "assets/icon_17655.png";
-      debugger; 
-
-      switch (type) {
-        case: 'switch'
+      var type = data.chassis.type
+        
+      if (type == 'switch') {
           return switch_image;
-          break;
-        case: 'node'
-          retun node_image; 
-          break;
-        default:
+      } else if (type == "node") {
+          return node_image; 
+      } else {
           return default_image;
       }
     }
