@@ -25,6 +25,11 @@ _.extend(NetSim.Chassis.prototype, Backbone.Events, {
   notify: function(message) {
     this.log.push(message);
     this.trigger("message", message);
+    console.log(this.id, "message", message);
+  },
+
+  lastMessage: function(){
+    return _.last(this.log);
   }
 
 });

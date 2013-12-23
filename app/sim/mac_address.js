@@ -4,7 +4,8 @@ NetSim.MacAddress = {
 
   random: function() {
     return _.times(6,function() {
-        return Math.round(Math.random() * 255).toString(16);
-    }).join(':');
+        var byte = Math.round(Math.random() * 255).toString(16);
+        return byte.length === 2 ? byte : "0" + byte;
+    }).join(':').toUpperCase();
   }
 };
