@@ -14,11 +14,11 @@ _.extend(NetSim.Frame.prototype, {
 
   validate: function() {
     if(!this.dstMAC || !NetSim.MacAddress.Pattern.test(this.dstMAC)) {
-      throw Error("Invalid destination MAC");
+      throw Error("Invalid destination MAC: ", this.dstMAC);
     }
 
     if(!this.srcMAC || !NetSim.MacAddress.Pattern.test(this.srcMAC)) {
-      throw Error("Invalid source MAC");
+      throw Error("Invalid source MAC: ", this.srcMAC);
     }
   }
 });
