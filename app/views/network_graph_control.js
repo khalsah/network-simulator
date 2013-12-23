@@ -61,12 +61,12 @@ function NetworkGraph(el) {
         var nodeEnter = node.enter().append("g").attr("class", "node").call(force.drag);
 
         nodeEnter.append("image")
-            .attr("class", "circle")
-            .attr("xlink:href", "https://d3nwyuy0nl342s.cloudfront.net/images/icons/public.png")
-            .attr("x", "-8px")
-            .attr("y", "-8px")
-            .attr("width", "16px")
-            .attr("height", "16px");
+            //.attr("class", "circle")
+            .attr("xlink:href", "https://github.com/favicon.ico")
+            .attr("x", -8)
+            .attr("y", -8)
+            .attr("width", 16)
+            .attr("height", 16);
 
         nodeEnter.append("text")
             .attr("class", "nodetext")
