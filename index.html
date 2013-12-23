@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html>
 <head>
   <title>Network Simulator</title>
 </head>
-<body style="height: 100%;">
-  <div id="network_graph" style="width: 100%; height: 100%;"></div>
+<body>
+  <div id="network_graph" style="width: 800px; height: 400px"></div>
+  <div id="addDevice">
+    <form action="#">
+      <label for="deviceName" >Name</label>
+      <input id="deviceName" placeholder="" type="text">
+
+      <label for="deviceType">Type</label>
+      <select id="deviceType"></select>
+
+      <label for="portCount">How Many Ports?</label>
+      <input id="portCount" placeholder="" type="text">
+
+      <input type="submit">
+    </form>
+    <button id="addDeviceButton">Add Device</button>
+  </div>
   <script src="vendor/jquery.js"></script>
+  <script>
+    $(function(){
+      $(document).on('submit','form',function(){
+        return false;
+      });
+
+      $("#addDevice form").hide();
+    });
+  </script>
   <script src="vendor/lodash.js"></script>
   <script src="vendor/backbone.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -23,7 +47,8 @@
   <script src="app/sim/switch.js"></script>
   <script src="app/sim/terminal.js"></script>
   <script src="app/views/network_graph_control.js"></script>
-  <script src="app/views/network_graph_view.js"></script> 
+  <script src="app/views/add_device.js"></script>
+  <script src="app/views/network_graph_view.js"></script>
 
   <link rel="stylesheet" type="text/css" href="app/index.css">
 

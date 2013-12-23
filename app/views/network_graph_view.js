@@ -14,7 +14,7 @@ NetViz.NetworkGraphView = Backbone.View.extend({
     this.connection_collection.bind('remove', this.on_connection_removed, this);
 
     this.connection_collection.bind('state', this.on_connection_state_change, this);
-
+    this.addDevice = new NetViz.AddDevice();
     this.render();
   },
 
