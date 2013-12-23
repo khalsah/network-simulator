@@ -7,6 +7,9 @@ NetSim.Connection =  function(network, portA, portB) {
   this.listenTo(this.portA, "transport", _.bind(this._send, this, this.portB));
   this.listenTo(this.portB, "transport", _.bind(this._send, this, this.portA));
   this.listenTo(this.network, "tick", _.bind(this._tick, this));
+
+  this.portA.lock();
+  this.portB.lock();
 };
 
 _.extend(NetSim.Connection.prototype, Backbone.Events, {

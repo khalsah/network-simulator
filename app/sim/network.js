@@ -1,6 +1,6 @@
 NetSim.Network = function() {
-  this.chassisCollection = new Backbone.Collection();
-  this.connectionCollection = new Backbone.Collection();
+  this.chassisList = new EventedList();
+  this.connectionList = new EventedList();
 
   this._startTicker();
 };
@@ -19,14 +19,25 @@ _.extend(NetSim.Network.prototype, Backbone.Events, {
 
   addChassis: function(klass, portCount) {
     var chassis = new klass(this, portCount);
-    this.chassisCollection.add(chassis);
+    this.chassisList.add(chassis);
     return chassis;
   },
 
   addConnection: function(portA, portB) {
     var connection = new NetSim.Connection(this, portA, portB);
-    this.connectionCollection.add(connection);
+    this.connectionList.add(connection);
     return connection;
+  },
+
+  connectChassisPair: function(chassisA, chassisB){
+    var portA = chassisA.availablePort();
+    var portB = chassisB.availablePort();
+
+    if (portA && portB){
+      return this.addConnection(portA, portB);
+    } else {
+      throw Error("Not enough available ports");
+    }
   }
 
 });

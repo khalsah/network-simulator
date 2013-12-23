@@ -9,6 +9,7 @@
   <script src="vendor/lodash.js"></script>
   <script src="vendor/backbone.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="app/lib/evented_list.js"></script>
 
   <script src="app/index.js"></script>
   <script src="app/sim/network.js"></script>
@@ -21,8 +22,8 @@
   <script>
     window.network = new NetSim.Network();
     window.graphView = new NetViz.NetworkGraphView(
-      window.network.chassisCollection,
-      window.network.connectionCollection
+      window.network.chassisList,
+      window.network.connectionList
     );
   </script>
 
