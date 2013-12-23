@@ -1,6 +1,6 @@
 function NetworkGraph(el) {
-    this.addNode = function (id, name) {
-        nodes.push({"id":id, "name":name, "group":1});
+    this.addNode = function (id, name, chassis) {
+        nodes.push({"id":id, "name":name, "group":1, "chassis":chassis});
         update();
     };
 
@@ -15,6 +15,18 @@ function NetworkGraph(el) {
 
         nodes.splice(findNodeIndex(id),1);
         update();
+    };
+
+    this.removeConnection = function(connection) {
+        var i = 0;
+
+        while (i < links.length) {
+          if ((links[i]['connection'] == connection) { 
+            links.splice(i,1); 
+          } else { 
+            i++; 
+          }
+        }
     };
 
     this.addLink = function (source, target, connection) {
@@ -32,12 +44,6 @@ function NetworkGraph(el) {
         }
     };
   
-    /*var findLink = function(id) {
-        for (var i in links) {
-        // TODO;
-        }
-    }*/
-
     var findNodeIndex = function(id) {
         for (var i in nodes) {
             if (nodes[i]["id"] === id) return i;
@@ -54,7 +60,7 @@ function NetworkGraph(el) {
 
     var force = d3.layout.force()
         .gravity(0.05)
-        .distance(100)
+        .distance(300)
         .charge(-100)
         .size([w, h]);
 
@@ -67,6 +73,7 @@ function NetworkGraph(el) {
         link.attr("class", function(data) { 
           return "link " + data.connection.state; 
         });
+
   
         link.enter().insert("line").attr("class", "link");
         link.exit().remove();
@@ -75,16 +82,16 @@ function NetworkGraph(el) {
         var nodeEnter = node.enter().append("g").attr("class", "node").call(force.drag);
 
         nodeEnter.append("image")
-            .attr("xlink:href", "https://github.com/favicon.ico")
+            .attr("xlink:href", function(data) { data.chassis.type } "https://github.com/favicon.ico")
             .attr("x", -8)
             .attr("y", -8)
-            .attr("width", 16)
-            .attr("height", 16);
+            .attr("width", 64)
+            .attr("height", 64);
 
         nodeEnter.append("text")
             .attr("class", "nodetext")
             .attr("dx", 12)
-            .attr("dy", ".35em")
+            .attr("dy", "5em")
             .text(function(d) {return d.id;});
 
         node.exit().remove();

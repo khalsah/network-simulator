@@ -1,14 +1,19 @@
 .link {
   stroke: black;
-  stroke-width: 2;
+  stroke-width: 5;
 }
 
 .active {
   stroke: green;
-  stroke-width: 2;
+  stroke-width: 5;
 }
 
 .inactive {
   stroke: black;
-  stroke-width: 2;
+  stroke-width: 5;
 }
+
+/*#network_graph {
+  width: 100% !important;
+  height: 100% !important;
+}*/
