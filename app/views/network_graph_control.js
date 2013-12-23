@@ -107,7 +107,7 @@ function NetworkGraph(el) {
             .attr("class", "nodetext")
             .attr("dx", 12)
             .attr("dy", "5em")
-            .text(function(d) {return d.id;});
+            .text(function(d) {return d.name || d.id;});
 
         node.exit().remove();
 
