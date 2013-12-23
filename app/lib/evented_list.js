@@ -6,6 +6,7 @@ _.extend(window.EventedList.prototype, Backbone.Events, {
   add: function(item){
     this.items.push(item);
     this.trigger('add', item);
+    this.listenTo(item, 'destroy', _.bind(this.remove, this, item));
     this.listenTo(item, 'all', _.bind(this.trigger, this));
     return this.item;
   },

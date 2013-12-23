@@ -15,6 +15,13 @@ NetSim.Connection =  function(network, portA, portB) {
 
 _.extend(NetSim.Connection.prototype, Backbone.Events, {
 
+  destroy: function() {
+    this.portA.unlock(this);
+    this.portB.unlock(this);
+    this.stopListening();
+    this.trigger("destroy");
+  },
+
   _send: function(destination, frame) {
     this.queue.push({
       destination: destination,
