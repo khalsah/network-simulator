@@ -4,23 +4,23 @@ NetSim.Connection =  function(network, portA, portB) {
   this.portB = portB;
   this.queue = [];
 
-  this.listenTo(this.portA, "frame", _.bind(this._send, this, this.portB));
-  this.listenTo(this.portB, "frame", _.bind(this._send, this, this.portA));
+  this.listenTo(this.portA, "transport", _.bind(this._send, this, this.portB));
+  this.listenTo(this.portB, "transport", _.bind(this._send, this, this.portA));
   this.listenTo(this.network, "tick", _.bind(this._tick, this));
 };
 
 _.extend(NetSim.Connection.prototype, Backbone.Events, {
 
-  _send: function(destination, message) {
+  _send: function(destination, frame) {
     this.queue.push({
       destination: destination,
-      message: message
+      frame: frame
     });
   },
 
   _tick: function() {
     var action = this.queue.shift();
-    if(action) action.destination.pushFrame(action.message);
+    if(action) action.destination.trigger("frame", action.frame);
   }
 
 });
