@@ -1,10 +1,17 @@
 NetSim.Chassis = function(network, portCount) {
   var self = this;
   this.network = network;
-  this.ports = _.times(portCount, function(i) {
-    var port = new NetSim.Port(self);
-  });
+  this._setupPorts(portCount);
 };
 
+NetSim.Chassis.extend = Backbone.Model.extend;
+
 _.extend(NetSim.Chassis.prototype, Backbone.Events, {
+
+  _setupPorts: function(portCount) {
+    this.ports = _.times(portCount, function(i) {
+      return new NetSim.Port(self);
+    });
+  }
+
 });
