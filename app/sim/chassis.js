@@ -30,6 +30,13 @@ _.extend(NetSim.Chassis.prototype, Backbone.Events, {
 
   lastMessage: function(){
     return _.last(this.log);
+  },
+
+  destroy: function() {
+    _.each(this.ports, function(port) {
+      if(port.lockedBy) port.lockedBy.destroy();
+    });
+    this.trigger("destroy");
   }
 
 });
