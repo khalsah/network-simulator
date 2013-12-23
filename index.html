@@ -12,11 +12,14 @@
   <script src="app/lib/evented_list.js"></script>
 
   <script src="app/index.js"></script>
+  <script src="app/sim/debug.js"></script>
   <script src="app/sim/network.js"></script>
+  <script src="app/sim/frame.js"></script>
   <script src="app/sim/connection.js"></script>
   <script src="app/sim/port.js"></script>
   <script src="app/sim/chassis.js"></script>
   <script src="app/sim/hub.js"></script>
+  <script src="app/sim/switch.js"></script>
   <script src="app/views/network_graph_control.js"></script>
   <script src="app/views/network_graph_view.js"></script> 
   <script>
@@ -28,7 +31,11 @@
   </script>
 
   <script>
-    this.network.addChassis(NetSim.Hub, 3);
+    var switch0 = this.network.addChassis(NetSim.Switch, 12);
+    var switch1 = this.network.addChassis(NetSim.Switch, 12);
+    var switch2 = this.network.addChassis(NetSim.Switch, 12);
+    this.network.connectChassisPair(switch0, switch1);
+    this.network.connectChassisPair(switch0, switch2);
   </script>
 </body>
 </html>
