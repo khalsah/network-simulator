@@ -1,17 +1,22 @@
-NetSim.Chassis = function(network, portCount) {
-  var self = this;
-  this.network = network;
-  this._setupPorts(portCount);
-};
+(function() {
+  var chassisCounter = 0;
 
-NetSim.Chassis.extend = Backbone.Model.extend;
+  NetSim.Chassis = function(network, portCount) {
+    var self = this;
+    this.id = chassisCounter++;
+    this.network = network;
+    this._setupPorts(portCount);
+  };
 
-_.extend(NetSim.Chassis.prototype, Backbone.Events, {
+  NetSim.Chassis.extend = Backbone.Model.extend;
 
-  _setupPorts: function(portCount) {
-    this.ports = _.times(portCount, function(i) {
-      return new NetSim.Port(self);
-    });
-  }
+  _.extend(NetSim.Chassis.prototype, Backbone.Events, {
 
-});
+    _setupPorts: function(portCount) {
+      this.ports = _.times(portCount, function(i) {
+        return new NetSim.Port(self);
+      });
+    }
+
+  });
+})();

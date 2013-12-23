@@ -2,10 +2,11 @@ function NetworkGraph(el) {
     this.addNode = function (id, name) {
         nodes.push({"id":id, "name":name, "group":1});
         update();
-    }
+    };
 
     this.removeNode = function (id) {
-        var i,n = 0, findNode(id);
+        var i = 0;
+        var n = this.findNode(id);
 
         while (i < links.length) {
           if ((links[i]['source'] == n)||(links[i]['target'] == n)) { links.splice(i,1); }
@@ -14,20 +15,24 @@ function NetworkGraph(el) {
 
         nodes.splice(findNodeIndex(id),1);
         update();
-    }
+    };
 
     this.addLink = function (source, target) {
         links.push({"source":findNode(source),"target":findNode(target)});
         update();
-    }
+    };
 
     var findNode = function(id) {
-        for (var i in nodes) {if (nodes[i]["id"] === id) return nodes[i]};
-    }
+        for (var i in nodes) {
+            if (nodes[i]["id"] === id) return nodes[i];
+        }
+    };
 
     var findNodeIndex = function(id) {
-        for (var i in nodes) {if (nodes[i]["id"] === id) return i};
-    }
+        for (var i in nodes) {
+            if (nodes[i]["id"] === id) return i;
+        }
+    };
 
     // set up the D3 visualisation in the specified element
     var w = $(el).innerWidth(),
@@ -38,7 +43,7 @@ function NetworkGraph(el) {
         .attr("height", h);
 
     var force = d3.layout.force()
-        .gravity(.05)
+        .gravity(0.05)
         .distance(100)
         .charge(-100)
         .size([w, h]);
@@ -67,7 +72,7 @@ function NetworkGraph(el) {
             .attr("class", "nodetext")
             .attr("dx", 12)
             .attr("dy", ".35em")
-            .text(function(d) {return d.id});
+            .text(function(d) {return d.id;});
 
         node.exit().remove();
 
@@ -81,7 +86,7 @@ function NetworkGraph(el) {
         });
 
         force.start();
-    }
+    };
 
     // Make it all go
     update();

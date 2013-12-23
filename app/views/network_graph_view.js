@@ -1,4 +1,4 @@
-App.Views.NetworkGraphView = Backbone.View.extend({
+NetViz.NetworkGraphView = Backbone.View.extend({
   el: '#network_graph',
 
   events: {
@@ -15,15 +15,14 @@ App.Views.NetworkGraphView = Backbone.View.extend({
   },
 
   render: function() {
-    this.networkGraph = new NetworkGraph(el);
-  }, 
+    this.networkGraph = new NetworkGraph(this.el);
+  },
 
   on_connection_added: function(added_connection) {
     this.networkGraph.addLink(added_connection.portA.chassis.id, added_connection.portB.chassis.id);
   },
 
   on_chassis_added: function(added_chassis) {
-    this.networkGraph.addNode(added_chassis.chassis.id, added_chassis.name);
+    this.networkGraph.addNode(added_chassis.id, added_chassis.name);
   }
-}
-
+});

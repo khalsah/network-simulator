@@ -4,10 +4,12 @@
   <title>Network Simulator</title>
 </head>
 <body>
-
+  <div id="network_graph"></div>
   <script src="vendor/jquery.js"></script>
   <script src="vendor/lodash.js"></script>
   <script src="vendor/backbone.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
   <script src="app/index.js"></script>
   <script src="app/sim/network.js"></script>
   <script src="app/sim/connection.js"></script>
@@ -15,15 +17,17 @@
   <script src="app/sim/chassis.js"></script>
   <script src="app/sim/hub.js"></script>
   <script src="app/views/network_graph_control.js"></script>
-  <script src="app/views/network_graph_view.js"></script>
-  <script src="app/collections/chassis_collection.js"></script> 
-  <script src="app/collections/connection_collection.js"></script> 
-  <script src="app/models/chassis_model.js"></script> 
-  <script src="app/models/connecition_model.js"></script> 
-    <script>
+  <script src="app/views/network_graph_view.js"></script> 
+  <script>
     window.network = new NetSim.Network();
+    window.graphView = new NetViz.NetworkGraphView(
+      window.network.chassisCollection,
+      window.network.connectionCollection
+    );
   </script>
 
-  <div id="network_graph"></div>
+  <script>
+    this.network.addChassis(NetSim.Hub, 3);
+  </script>
 </body>
 </html>
