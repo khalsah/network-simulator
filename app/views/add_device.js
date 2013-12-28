@@ -15,7 +15,7 @@ NetViz.AddDevice = Backbone.View.extend({
       return _.template('<option><%= name %></option>')({name: name});
     });
 
-    this.$el.find('#deviceName').html('');
+    this.$el.find('#deviceName').val('');
     this.$el.find('#deviceType').html(typeOptions);
     this.$el.find('form').show();
     this.$el.find('#addDeviceButton').hide();
