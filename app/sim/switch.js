@@ -1,7 +1,6 @@
 NetSim.Switch = NetSim.Chassis.extend({
 
-  constructor: function(network, portCount) {
-    NetSim.Chassis.call(this, network, portCount);
+  initialize: function(network, portCount) {
 
     this.reset();
 
@@ -23,6 +22,7 @@ NetSim.Switch = NetSim.Chassis.extend({
     } else {
       this.notify("MAC Address not found, broadcasting");
       this.broadcast(port, frame);
+      this.trigger('recvFrame', frame);
     }
   },
 

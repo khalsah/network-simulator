@@ -3,6 +3,7 @@ NetSim.Chassis = function(network, portCount) {
   this.network = network;
   this.log = [];
   this._setupPorts(portCount);
+  if(_.isFunction(this.initialize)) this.initialize(network, portCount);
 };
 
 NetSim.Chassis.extend = Backbone.Model.extend;
